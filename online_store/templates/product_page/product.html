@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block title %}
+<title>{{ product_item.name }}</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'product_page/styles/product_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'product_page/styles/product_responsive.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="super_container">
+
+  <!-- Single Product -->
+
+  <div class="single_product">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-5 order-lg-2 order-1">
+          <div class="image_selected"><img src="{{ product_item.image }}" alt=""></div>
+        </div>
+
+        <!-- Description -->
+        <div class="col-lg-7 order-3">
+          <div class="product_description">
+            <div class="product_category" style="text-transform: capitalize;">
+              {% if category == 'book' %}
+              Sách
+              {% elif category == 'clothes' %}
+              Quần áo
+              {% elif category == 'shoes' %}
+              Giầy dép
+              {% elif category == 'electronics' %}
+              Đồ điện tử
+              {% endif %}
+            </div>
+            <div class="product_name" style="text-transform: capitalize;">{{ product_item.name }}</div>
+            <div class="rating_r rating_r_4 product_rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="order_info d-flex flex-row">
+              <form action="/cart/add-item" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ product_item.id }}">
+                <div class="clearfix" style="z-index: 1000;">
+
+                  <!-- Product Quantity -->
+                  <div class="product_quantity clearfix">
+                    <input id="quantity_input" type="text" pattern="[0-9]*" value="1" name="quantity">
+                    <div class="quantity_buttons">
+                      <div id="quantity_inc_button" class="quantity_inc quantity_control"><i
+                          class="fas fa-chevron-up"></i></div>
+                      <div id="quantity_dec_button" class="quantity_dec quantity_control"><i
+                          class="fas fa-chevron-down"></i></div>
+                    </div>
+                  </div>
+                  <div class="product_inventory">
+                    Kho: {{ product.inventory }}
+                  </div>
+
+                </div>
+
+                <div class="product_price">
+                  {% if product_item.discount > 0 %}
+                  <span style="text-decoration: line-through;font-size: 1rem; margin-right: 16px;">
+                    <sup>đ</sup>
+                    {{ product_item.sale_price|floatformat:0|intcomma }}
+                  </span>
+                  <sup>đ</sup>
+                  {{product_item.sale_price|mul:product_item.discount|div:100|sub:product_item.sale_price|abs|floatformat:0|intcomma}}
+                  {% else %}
+                  <sup>đ</sup>
+                  {{ product_item.sale_price|floatformat:0|intcomma }}
+                  {% endif %}
+                </div>
+                <div class="button_container">
+                  <button type="submit" class="button cart_button">Thêm vào giỏ hàng</button>
+                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="product_text mt-5 py-3">
+            <h3 class="mb-3">Mô tả sản phẩm</h3>
+            <div style="font-size: 1rem; border-width: 1px 0; border-style: solid; border-color: #ccc;">
+              {% if category == 'book' %}
+              {% include 'product_page/book.html' %}
+              {% elif category == 'clothes' %}
+              {% include 'product_page/clothes.html' %}
+              {% elif category == 'shoes' %}
+              {% include 'product_page/shoes.html' %}
+              {% elif category == 'electronics' %}
+              {% include 'product_page/electronics.html' %}
+              {% endif %}
+            </div>
+            <p style="white-space: pre-line;">
+              {{ product_item.description|linebreaksbr }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+
+  <div class="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div
+            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+            <div class="newsletter_title_container">
+              <div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+              <div class="newsletter_title">Sign up for Newsletter</div>
+              <div class="newsletter_text">
+                <p>...and receive %20 coupon for first shopping.</p>
+              </div>
+            </div>
+            <div class="newsletter_content clearfix">
+              <form action="#" class="newsletter_form">
+                <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+                <button class="newsletter_button">Subscribe</button>
+              </form>
+              <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'product_page/js/product_custom.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block title %}
+<title>TUDStore | Sản phẩm</title>
+{% endblock %}
+
+{% block content %}
+<div class="new_arrivals">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="tabbed_container">
+          <div class="tabs pb-3" style="border-bottom: 1px solid #ccc;">
+            <ul class="ml-4 clearfix">
+              <li class="">
+                <a href="/product" class="
+                {% if request.GET.category != None %}
+                  text-dark
+                {% endif %}">
+                  All
+                </a>
+              </li>
+              <li>
+                <a href="/product?category=book" class="
+                {% if request.GET.category != 'book' %}
+                  text-dark
+                {% endif %}
+                ">
+                  Book
+                </a>
+              </li>
+              <li>
+                <a href="/product?category=clothes" class="
+                {% if request.GET.category != 'clothes' %}
+                  text-dark
+                {% endif %}
+                ">
+                  Clothes
+                </a>
+              </li>
+              <li>
+                <a href="/product?category=shoes" class="
+                {% if request.GET.category != 'shoes' %}
+                  text-dark
+                {% endif %}
+                ">
+                  Shoes
+                </a>
+              </li>
+              <li>
+                <a href="/product?category=electronics" class="
+                {% if request.GET.category != 'electronics' %}
+                  text-dark
+                {% endif %}
+                ">
+                  Electronics
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            {% if products|length > 0 %}
+            {% for product in products %}
+            <div class="col-3" style="z-index:1;">
+              <a href="/product/{{ product.slug }}"
+                class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                    src="{{ product.image }}" alt=""></div>
+                <div class="product_content mt-2">
+                  <div class="product_price m-0">
+                    <sup>đ</sup>
+                    {% if product.discount > 0 %}
+                    {{ product.sale_price|mul:product.discount|div:100|sub:product.sale_price|abs|floatformat:0|intcomma }}
+                    {% else %}
+                    {{ product.sale_price|floatformat:0|intcomma }}
+                    {% endif %}
+                  </div>
+                  <div class="product_name text-dark" style="font-weight: 500; font-size: 1rem; text-transform: capitalize; overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;">
+                    <div>{{ product.name }}</div>
+                  </div>
+                </div>
+                <ul class="product_marks">
+                  {% if product.discount > 0 %}
+                  <li class="product_mark product_discount">{{ product.discount|floatformat:0 }}%</li>
+                  {% endif %}
+                </ul>
+              </a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <img class="mx-auto w-50 h-auto"
+              src="https://www.dokantec.com/resources/assets/front/images/no-product-found.png"
+              alt="no product found" />
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {% if total_page > 0 %}
+        <div class="d-flex align-items-center justify-content-center mt-5" style="font-size: 1.25rem;">
+          <a href="?page={{ prev_page }}" class="p-2">
+            <i class="fa-solid fa-chevron-left m-0"></i>
+          </a>
+          <ul class="d-flex align-items-center">
+            {% for page in pages %}
+            <li><a href="?page={{ forloop.counter0 }}" class="p-3">{{ forloop.counter }}</a></li>
+            {% endfor %}
+          </ul>
+          <a href="?page={{ next_page }}" class="p-2"><i class="fa-solid fa-chevron-right m-0"></i></a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

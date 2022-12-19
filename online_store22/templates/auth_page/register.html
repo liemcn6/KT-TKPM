@@ -1,0 +1,57 @@
+{% extends 'auth_page/base.html' %}
+
+{% block head %}
+<title>TUDStore | Register</title>
+{% endblock %}
+
+{% block content %}
+<h1 class="form__header">
+  Register new user
+</h1>
+<div class="text-muted mt-4 mb-3 fs-5">
+  Complete bellow form to join with us now!
+  <div class="icon">
+    <i class="fa-solid fa-bell"></i>
+  </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="message message-{{ message.tags }} my-2">
+  {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+<form action="" method="POST" id="login-form" class="d-flex flex-column align-items-start form">
+  {% csrf_token %}
+  <div class="form-group">
+    <div class="form-wrapper me-3">
+      {{ form.first_name.errors }}
+      <label for="{{ form.first_name.id_for_label }}">First Name</label>
+      {{ form.first_name }}
+    </div>
+    <div class="form-wrapper">
+      {{ form.last_name.errors }}
+      <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+      {{ form.last_name }}
+    </div>
+  </div>
+  <div class="form-wrapper">
+    {{ form.username.errors }}
+    <label for="{{ form.username.id_for_label }}">Username</label>
+    {{ form.username }}
+  </div>
+  <div class="form-wrapper">
+    {{ form.password.errors }}
+    <label for="{{ form.password.id_for_label }}">Password</label>
+    {{ form.password }}
+  </div>
+</form>
+<div class="form-btn d-flex align-items-center justify-content-between mt-5">
+  <button form="login-form" type="submit" class="btn btn-submit rounded-pill px-4 py-2 text-white">
+    Register
+  </button>
+  <a href="{% url 'auth_login' %}">Login</button>
+</div>
+{% endblock %}

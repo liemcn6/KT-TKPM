@@ -1,0 +1,157 @@
+{% load humanize %}
+
+<header class="header">
+
+  <!-- Top Bar -->
+
+  <div class="top_bar">
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex flex-row">
+          <div class="top_bar_contact_item">
+            <div class="top_bar_icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>+38 068 005 3570
+          </div>
+          <div class="top_bar_contact_item">
+            <div class="top_bar_icon">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
+          </div>
+          <div class="top_bar_content ml-auto">
+            <div class="top_bar_user">
+              {% if user.is_authenticated %}
+              <a href="/user/profile" class="user-profile-link">
+                <i class="fa-solid fa-user"></i>
+                <p>{{ user.get_full_name }}</p>
+              </a>
+              <div class="user-menu">
+                <ul>
+                  <li>
+                    <a href="/user/profile">
+                      Hồ sơ
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      Đổi mật khẩu
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'auth_logout' %}">
+                      Đăng xuất
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              {% else %}
+              <div class="d-flex align-items-center">
+                <div><a href="/user/auth/register">Đăng ký</a></div>
+                <span class="mx-2">|</span>
+                <div><a href="/user/auth/login">Đăng nhập</a></div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Main -->
+
+  <div class="header_main">
+    <div class="container">
+      <div class="row">
+
+        <!-- Logo -->
+        <div class="col-lg-2 col-sm-3 col-3 order-1">
+          <div class="logo_container">
+            <div class="logo">
+              <a href="/">TUDStore</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="col-lg-8 col-12 order-lg-2 order-3 text-lg-left text-right">
+          <div class="header_search">
+            <div class="header_search_content">
+              <div class="header_search_form_container">
+                <form action="#" class="header_search_form clearfix">
+                  <input type="search" required="required" class="header_search_input"
+                    placeholder="Tìm kiếm sản phẩm...">
+                  <div class="custom_dropdown">
+                    <div class="custom_dropdown_list">
+                      <span class="custom_dropdown_placeholder clc">Phân loại</span>
+                      <i class="fas fa-chevron-down"></i>
+                      <ul class="custom_list clc">
+                        {% for category in categories %}
+                        <li>
+                          <a class="clc" href="/{{ category.slug }}">
+                            {{ category.title }}
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                  <button type="submit" class="header_search_button trans_300" value="Submit">
+                    <i class="fa-solid fa-magnifying-glass text-white"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wishlist -->
+        <div class="col-lg-2 col-9 order-lg-3 order-2 text-lg-left text-right">
+          <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+            <!-- Cart -->
+            <a href="/cart" class="cart">
+              <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                <div class="cart_icon">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  {% if cart_item_count != None %}
+                  <div class="cart_count"><span>{{ cart_item_count }}</span></div>
+                  {% endif %}
+                </div>
+                <div class="cart_content">
+                  <div class="cart_text">Giỏ hàng</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+
+  <nav class="main_nav">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+
+          <div class="main_nav_content d-flex flex-row">
+
+            <!-- Main Nav Menu -->
+
+            <div class="main_nav_menu">
+              <ul class="standard_dropdown main_nav_dropdown">
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/product">Sản phẩm</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</header>

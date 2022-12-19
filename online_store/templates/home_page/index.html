@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="super_container">
+
+  <!-- product list -->
+
+  <div class="new_arrivals">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="tabbed_container">
+            <div class="tabs clearfix tabs-right">
+              <div class="new_arrivals_title">Product</div>
+              <div class="tabs_line"><span></span></div>
+            </div>
+            <div class="row">
+              <div class="col-3" style="z-index:1;">
+                <!-- Slider Item -->
+                <div
+                  class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                  <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                      src="images/new_1.jpg" alt=""></div>
+                  <div class="product_content">
+                    <div class="product_price">$225</div>
+                    <div class="product_name">
+                      <div><a href="product.html">Astro M2 Black</a></div>
+                    </div>
+                    <div class="product_extras">
+                      <div class="product_color">
+                        <input type="radio" checked name="product_color" style="background:#b19c83">
+                        <input type="radio" name="product_color" style="background:#000000">
+                        <input type="radio" name="product_color" style="background:#999999">
+                      </div>
+                      <button class="product_cart_button">Add to Cart</button>
+                    </div>
+                  </div>
+                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+                  <ul class="product_marks">
+                    <li class="product_mark product_discount">-25%</li>
+                    <li class="product_mark product_new">new</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Characteristics -->
+
+  <div class="characteristics">
+    <div class="container">
+      <div class="row">
+
+        <!-- Char. Item -->
+        <div class="col-lg-3 col-md-6 char_col">
+
+          <div class="char_item d-flex flex-row align-items-center justify-content-start">
+            <div class="char_icon">
+              <i class="fa-solid fa-truck"></i>
+            </div>
+            <div class="char_content">
+              <div class="char_title">Free Delivery</div>
+              <div class="char_subtitle">from $10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Char. Item -->
+        <div class="col-lg-3 col-md-6 char_col">
+
+          <div class="char_item d-flex flex-row align-items-center justify-content-start">
+            <div class="char_icon">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+            <div class="char_content">
+              <div class="char_title">Free refund</div>
+              <div class="char_subtitle">in 15 days</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Char. Item -->
+        <div class="col-lg-3 col-md-6 char_col">
+
+          <div class="char_item d-flex flex-row align-items-center justify-content-start">
+            <div class="char_icon">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+            <div class="char_content">
+              <div class="char_title">Free Delivery</div>
+              <div class="char_subtitle">from $50</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Char. Item -->
+        <div class="col-lg-3 col-md-6 char_col">
+
+          <div class="char_item d-flex flex-row align-items-center justify-content-start">
+            <div class="char_icon">
+              <i class="fa-solid fa-tag"></i>
+            </div>
+            <div class="char_content">
+              <div class="char_title">Free Delivery</div>
+              <div class="char_subtitle">from $50</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Newsletter -->
+
+  <div class="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div
+            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+            <div class="newsletter_title_container">
+              <div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+              <div class="newsletter_title">Sign up for Newsletter</div>
+              <div class="newsletter_text">
+                <p>...and receive %20 coupon for first shopping.</p>
+              </div>
+            </div>
+            <div class="newsletter_content clearfix">
+              <form action="#" class="newsletter_form">
+                <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+                <button class="newsletter_button">Subscribe</button>
+              </form>
+              <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'home_page/js/custom.js' %}"></script>
+{% endblock %}

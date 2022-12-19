@@ -1,0 +1,13 @@
+.header .header__logo {
+  display: block;
+  width: fit-content;
+  color: #0E8CE4;
+}
+
+.header .header__logo div {
+  width: fit-content;
+}
+
+.header .header__logo div:first-child {
+  letter-spacing: 5px;
+}

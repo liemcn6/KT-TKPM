@@ -1,0 +1,59 @@
+.form__header {
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.form__header~div .icon {
+  color: #FFC83D;
+  display: inline-block;
+  transform: rotate(-30deg);
+}
+
+.form__header~div .icon svg {
+  stroke: #000;
+  stroke-width: 30px;
+}
+
+.form label {
+  margin-top: 20px;
+}
+
+.form .form-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.form .form-wrapper {
+  width: 100%;
+}
+
+.form .form-control {
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+.btn-submit {
+  background-color: #0E8CE4;
+  font-weight: 500;
+}
+
+.btn-submit:hover {
+  filter: brightness(90%);
+}
+
+.btn-unstyled {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  outline: none;
+}
+
+.btn-swap-form {
+  color: #1290eb;
+}
+
+.btn-swap-form:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block title %}
+<title>Giỏ hàng</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'cart_page/styles/cart_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'cart_page/styles/cart_responsive.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="super_container">
+
+  <!-- Cart -->
+
+  <div class="cart_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="cart_container">
+            <div class="cart_title">Giỏ hàng</div>
+            <div class="cart_items">
+              <form action="" method="POST" id="process-order-form">
+                {% csrf_token %}
+                <ul class="cart_list">
+                  {% for cart_item in cart_items %}
+                  <li class="cart_item clearfix d-flex align-items-center">
+                    <div class="d-inline-block">
+                      <input type="checkbox" name="{{ cart_item.item.id }}" style="width: 20px; height: 20px;" value="{{ cart_item.item.id }}" />
+                    </div>
+                    <div class="" style="width: 133px; height: 133px;">
+                      <img src="{{ cart_item.item.item_info.image }}" alt="" class="w-100 h-100 ml-3">
+                    </div>
+                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                      <div class="cart_item_name cart_info_col">
+                        <div class="cart_item_title">Sản phẩm</div>
+                        <div style="font-size: 1rem;" class="mt-3">{{ cart_item.item.item_info.name }}</div>
+                      </div>
+                      <div class="cart_item_quantity cart_info_col">
+                        <div class="cart_item_title">Số lượng</div>
+                        <input type="number" value="{{ cart_item.quantity }}" name="quantity" min="0" pattern="[0-9]" style="width: 60px;" class="mt-3">
+                      </div>
+                      <div class="cart_item_price cart_info_col">
+                        <div class="cart_item_title">Đơn giá</div>
+                        <div class="mt-3" style="font-size: 1rem;">{{ cart_item.item.item_info.sale_price|floatformat:0|intcomma }}</div>
+                      </div>
+                      <div class="cart_item_total cart_info_col">
+                        <div class="cart_item_title">Thành tiền</div>
+                        <div class="mt-3" style="font-size: 1rem;">
+                          {{ cart_item.item.item_info.sale_price|mul:cart_item.quantity|floatformat:0|intcomma }}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </form>
+            </div>
+
+            <!-- Order Total -->
+            <div class="order_total">
+              <div class="order_total_content text-md-right">
+                <div class="order_total_title">Tổng đơn hàng</div>
+                <div class="order_total_amount">{{ total_price|floatformat:0|intcomma }}</div>
+              </div>
+            </div>
+
+            <div id="order-msg" style="color: red; margin-top: 10px;"></div>
+
+            <div class="cart_buttons">
+              <button type="button" id="order-btn" class="button cart_button_checkout">
+                Thanh toán
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+
+  <div class="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div
+            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+            <div class="newsletter_title_container">
+              <div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+              <div class="newsletter_title">Sign up for Newsletter</div>
+              <div class="newsletter_text">
+                <p>...and receive %20 coupon for first shopping.</p>
+              </div>
+            </div>
+            <div class="newsletter_content clearfix">
+              <form action="#" class="newsletter_form">
+                <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+                <button class="newsletter_button">Subscribe</button>
+              </form>
+              <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'cart_page/js/cart_custom.js' %}"></script>
+<script src="{% static 'cart_page/js/order_process.js' %}"></script>
+{% endblock %}
+</body>
+
+</html>

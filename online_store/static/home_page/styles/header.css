@@ -1,0 +1,63 @@
+.top_bar_user {
+  position: relative;
+  height: 100%;
+}
+
+.user-profile-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.user-profile-link svg {
+  font-size: 1.25rem;
+  margin-right: 12px;
+}
+
+.user-profile-link p {
+  margin: 0;
+  line-height: 1;
+  font-size: 1rem;
+  color: #000;
+}
+
+.user-profile-link:hover p {
+  opacity: 0.6;
+}
+
+.top_bar_user:hover .user-menu {
+  display: block !important;
+}
+
+.user-menu {
+  display: none;
+  position: absolute;
+  top: 85%;
+  right: 0;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 8px 0;
+  background-color: #fff;
+  margin: 0 !important;
+  border: 1px solid #f4f3f3;
+}
+
+.user-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-menu ul li a {
+  padding: 12px 20px;
+  white-space: nowrap;
+  display: block;
+  line-height: 1;
+}
+
+.wishlist_icon {
+  font-size: 1.75rem;
+}
+
+.cart_icon {
+  font-size: 1.75rem;
+}
